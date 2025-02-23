@@ -55,7 +55,8 @@ jobs:
         echo "::set-output name=version::$NEW_VERSION"  # Set the output
 
     - name: Check VERSION after setting
-      run: echo "VERSION is now: ${{ steps.increment_version.outputs.version }}"
+      run: |
+        echo "VERSION is now: ${{ steps.increment_version.outputs.version }}"
 
     - name: Commit version update if version changed
       run: |
@@ -66,10 +67,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Clean and Build the project
-      run: mvn clean install
+      run: |
+        mvn clean install
 
     - name: Package the .jar file
-      run: mvn package
+      run: |
+        mvn package
 
     - name: Upload .jar as Artifact
       uses: actions/upload-artifact@v4
@@ -92,7 +95,8 @@ jobs:
         path: target
 
     - name: Set VERSION for Docker build
-      run: echo "VERSION=${{ needs.build.outputs.VERSION }}" >> $GITHUB_ENV
+      run: |
+        echo "VERSION=${{ needs.build.outputs.VERSION }}" >> $GITHUB_ENV
 
     - name: Debug VERSION variable
       run: |
