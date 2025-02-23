@@ -122,21 +122,21 @@ jobs:
     - name: Push Docker Image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
       
- deploy:
-    needs: build
-    runs-on: ubuntu-latest
+deploy:
+   needs: build
+   runs-on: ubuntu-latest
 
-    steps:
-    - name: Set up acces to EC2
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.EC2 }}
+   steps:
+   - name: Set up acces to EC2
+     uses: webfactory/ssh-agent@v0.5.3
+     with:
+       ssh-private-key: ${{ secrets.EC2 }}
 
-    - name: Connect to EC2 and Deploy Docker Image
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@16.171.227.78 <<EOF
-          docker pull ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
-          docker stop java-app || true
-          docker rm java-app || true
-          docker run -d --name java-app -p 8080:8080 w0lf90/do22:java-app-${{ env.VERSION }}
-        EOF
+   - name: Connect to EC2 and Deploy Docker Image
+     run: |
+       ssh -o StrictHostKeyChecking=no ubuntu@16.171.227.78 <<EOF
+         docker pull ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
+         docker stop java-app || true
+         docker rm java-app || true
+         docker run -d --name java-app -p 8080:8080 w0lf90/do22:java-app-${{ env.VERSION }}
+       EOF
