@@ -87,6 +87,8 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ env.VERSION }}
     
     steps:
     - name: Checkout code
@@ -136,10 +138,10 @@ jobs:
        run: |
          ssh -o StrictHostKeyChecking=no ubuntu@16.171.227.78 <<EOF
            sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-           sudo docker pull ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
+           sudo docker pull ${{ secrets.DOCKER_USER }}/do22:java-app-${{ needs.docker.outputs.VERSION }}
            sudo docker stop java-app || true
            sudo docker rm java-app || true
-           sudo docker run -d --name java-app -p 8080:8080 w0lf90/do22:java-app-${{ env.VERSION }}
+           sudo docker run -d --name java-app -p 8080:8080 w0lf90/do22:java-app-${{ needs.docker.outputs.VERSION }}
          EOF
        env:
          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
