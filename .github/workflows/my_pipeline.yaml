@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: maven:3.9.2-openjdk-17-slim
+      image: maven:3.9.2-openjdk-17
       
     steps:
     - name: Checkout code
