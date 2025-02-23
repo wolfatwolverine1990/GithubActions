@@ -141,7 +141,7 @@ jobs:
            sudo docker pull ${{ secrets.DOCKER_USER }}/do22:java-app-${{ needs.docker.outputs.VERSION }}
            sudo docker stop java-app || true
            sudo docker rm java-app || true
-           sudo docker run -d --name java-app -p 8080:8080 w0lf90/do22:java-app-${{ needs.docker.outputs.VERSION }}
+           sudo docker run -d --name java-app -p 8080:8080 ${{ secrets.DOCKER_USER }}/do22:java-app-${{ needs.docker.outputs.VERSION }} tail -f /dev/null
          EOF
        env:
          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
