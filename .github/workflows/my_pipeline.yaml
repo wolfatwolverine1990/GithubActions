@@ -50,6 +50,9 @@ jobs:
         mvn versions:set -DnewVersion=$NEW_VERSION -DgenerateBackupPoms=false
         echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
+    - name: Check VERSION after setting
+      run: echo "VERSION is now: ${{ env.VERSION }}"
+
     - name: Commit version update
       run: |
         git config user.name "github-actions[bot]"
@@ -92,6 +95,9 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
     
+    - name: Debug VERSION variable
+      run: echo "VERSION is set to: ${{ env.VERSION }}"
+
     - name: Build Docker Image
       run: |
         docker build -t java-app-${{ env.VERSION }} -f ./multistage.dockerfile .
