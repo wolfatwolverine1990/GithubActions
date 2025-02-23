@@ -1,4 +1,4 @@
-name: Java CI/CD Pipeline with Docker
+name: CI/CD Pipeline with Docker and Maven
 
 on:
   push:
