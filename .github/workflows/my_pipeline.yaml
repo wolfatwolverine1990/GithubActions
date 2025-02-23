@@ -16,7 +16,7 @@ jobs:
       
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Increment stable version number
       run: |
@@ -47,7 +47,7 @@ jobs:
       run: mvn package
 
     - name: Upload .jar as Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: my-app
         path: target/*.jar
