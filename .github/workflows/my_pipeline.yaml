@@ -78,9 +78,8 @@ jobs:
       run: |
         VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         VERSION=$(echo $VERSION | sed 's/-SNAPSHOT//')  # Remove -SNAPSHOT if present
-        echo "VERSION=$VERSION" >> $GITHUB_ENV  # Save version for later steps
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    # Login to Docker Hub
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
 
