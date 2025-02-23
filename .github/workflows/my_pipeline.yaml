@@ -51,7 +51,8 @@ jobs:
         echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
     - name: Check VERSION after setting
-      run: echo "VERSION is now: ${{ env.VERSION }}"
+      run: |
+        echo "VERSION is now: ${{ env.VERSION }}"
 
     - name: Commit version update if version changed
       run: |
