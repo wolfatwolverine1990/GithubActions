@@ -123,7 +123,7 @@ jobs:
       run: docker push ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
       
   deploy:
-     needs: build
+     needs: docker
      runs-on: ubuntu-latest
 
      steps:
