@@ -12,7 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      # Using the official Maven container image ensures a stable Apache Maven environment.
       image: maven:3.6.3-jdk-11
       
     steps:
@@ -21,7 +20,6 @@ jobs:
 
     - name: Increment stable version number
       run: |
-        # Retrieve the current version from pom.xml (e.g., "1.0-SNAPSHOT")
         CURRENT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         echo "Current version: $CURRENT_VERSION"
         
