@@ -84,7 +84,7 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
 
     - name: Tag Docker Image
-      run: docker tag java-app:$VERSION ${{ secrets.DOCKER_USER }}/do22:$VERSION
+      run: docker tag target/*.jar java-app-${{ env.VERSION }}
 
     - name: Push Docker Image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USER }}/do22:$VERSION
+      run: docker push ${{ secrets.DOCKER_USER }}/do22:java-app-${{ env.VERSION }}
