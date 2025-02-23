@@ -95,7 +95,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
     
     - name: Debug VERSION variable
-      run: echo "VERSION is set to: ${{ env.VERSION }}"
+      run: |
+        echo "VERSION is set to: ${{ env.VERSION }}"
 
     - name: Build Docker Image
       run: |
